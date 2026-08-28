@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>QR Codes | Edueme × Edify Robotics Expo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="tech-bg" aria-hidden="true"><span class="scan"></span><span class="circuit c1"></span><span class="circuit c2"></span><span class="node n1"></span><span class="node n2"></span></div>
+<header class="site-header"><a class="brand" href="index.html"><img src="assets/edueme-final-logo.png" alt="Edueme Research Labs"><span class="brand-divider">×</span><img src="assets/edify-logo.png" alt="Edify World School"></a><nav><a href="index.html#home">HOME</a><a href="index.html#projects">PROJECTS</a><a class="active" href="qr.html">QR CODES</a><a href="index.html#about">ABOUT</a></nav><button class="menu">☰</button></header>
+<main>
+<section class="qr-hero"><small>EDUEME × EDIFY · CULMINATION DAY 2026</small><h1>SCAN THE<br><span>EXPO.</span></h1><p>Use the main QR at the entrance so parents can open the full exhibition. Use an individual QR beside a project for direct access to that project.</p></section>
+<section class="main-qr-section qr-main-page"><div class="main-qr-copy"><small>MAIN EXHIBITION QR</small><h2>ONE SCAN.<br><span>EVERY PROJECT.</span></h2><p>This QR opens the expo homepage. It is designed for the entrance stand, reception desk, invitation card or event poster.</p><button class="print-btn" onclick="window.print()">PRINT QR PAGE</button></div><div class="main-qr-frame"><div id="mainQr"></div><span>EDUEME × EDIFY</span><small>ROBOTICS &amp; INNOVATION EXPO 2026</small></div></section>
+<section class="section qr-project-section"><div class="section-title"><div><small>INDIVIDUAL PROJECT QR CODES</small><h2>DIRECT PROJECT ACCESS</h2><p>Print one card for each physical project. Scanning a card opens that project's detail page.</p></div><div class="section-line"></div></div><div id="qrGrid" class="qr-grid"></div></section>
+</main>
+<footer><span>EDUEME RESEARCH LABS × EDIFY WORLD SCHOOL</span><span>CULMINATION DAY 2026 · ROBOTICS &amp; INNOVATION EXPO</span></footer>
+<script src="projects.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+const mainTarget=new URL('index.html',location.href).href;
+if(window.QRCode)new QRCode(document.getElementById('mainQr'),{text:mainTarget,width:210,height:210,correctLevel:QRCode.CorrectLevel.H});
+const grid=document.getElementById('qrGrid');
+projects.forEach(p=>{const card=document.createElement('div');card.className='qr-card';const box=document.createElement('div');box.className='qr-box';card.appendChild(box);if(window.QRCode)new QRCode(box,{text:new URL('project.html?id='+p.number,location.href).href,width:170,height:170,correctLevel:QRCode.CorrectLevel.H});card.insertAdjacentHTML('beforeend',`<div class="qr-project-no">PROJECT ${String(p.number).padStart(2,'0')}</div><h3>${p.title}</h3><p>${p.students}</p>`);grid.appendChild(card);});
+</script>
+</body></html>
